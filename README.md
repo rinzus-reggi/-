@@ -1,2 +1,741 @@
 # -
 Официальный сайт Корпуса пожарных спасателей имени Игоря Люкшина при кадетской школе. Здесь готовят будущих спасателей: профильная подготовка, физразвитие, дисциплина, кадетское братство. Честь. Отвага. Профессионализм. Приходите учиться спасать жизни!
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Корпус пожарных спасателей им. Игоря Люкшина</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+
+  body {
+    background: #0f0f0f;
+    color: #eee;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* ===== ШАПКА С ТВОЕЙ КАРТИНКОЙ ПОЖАРНЫХ ===== */
+  header {
+    position: relative;
+    padding: 70px 20px 55px;
+    text-align: center;
+    overflow: hidden;
+    background:
+      linear-gradient(rgba(10, 0, 0, 0.55), rgba(30, 0, 0, 0.8)),
+      url('firefighters.jpg') center/cover no-repeat;
+    background-attachment: fixed;
+    box-shadow: 0 4px 25px rgba(255, 69, 0, 0.45);
+    border-bottom: 3px solid #ff4500;
+  }
+
+  header::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 100%, rgba(255,69,0,0.35), transparent 70%);
+    pointer-events: none;
+  }
+
+  header h1 {
+    position: relative;
+    font-size: 2.3rem;
+    letter-spacing: 1px;
+    text-shadow: 0 3px 15px rgba(0,0,0,0.9), 0 0 30px rgba(255,69,0,0.6);
+    margin-bottom: 10px;
+    z-index: 1;
+  }
+
+  header h2 {
+    position: relative;
+    font-size: 1.15rem;
+    font-weight: 400;
+    opacity: 0.95;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+    z-index: 1;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 20px;
+  }
+
+  .info-block {
+    background: rgba(26, 26, 26, 0.95);
+    border-left: 5px solid #ff4500;
+    padding: 20px 25px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  .info-block p { margin: 5px 0; }
+  .info-block strong { color: #ff7043; }
+  .info-block a { color: #ff7043; text-decoration: none; font-weight: 700; }
+  .info-block a:hover { text-decoration: underline; }
+
+  h3.section-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #ff7043;
+    text-align: center;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  }
+
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 25px;
+  }
+
+  .tab {
+    background: #1f1f1f;
+    color: #ccc;
+    border: 2px solid #333;
+    padding: 12px 28px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    letter-spacing: 0.5px;
+  }
+
+  .tab:hover {
+    border-color: #ff4500;
+    color: #ff7043;
+    transform: translateY(-2px);
+  }
+
+  .tab.active {
+    background: linear-gradient(135deg, #b22222, #ff4500);
+    color: #fff;
+    border-color: #ff4500;
+    box-shadow: 0 4px 15px rgba(255, 69, 0, 0.5);
+  }
+
+  .tab.leaders-tab { border-color: #b8860b; color: #ffd166; }
+  .tab.leaders-tab:hover {
+    border-color: #ffd166;
+    color: #fff2b8;
+    box-shadow: 0 4px 15px rgba(255, 209, 102, 0.35);
+  }
+  .tab.leaders-tab.active {
+    background: linear-gradient(135deg, #8b6914, #d4a017, #ffd166);
+    color: #1a1a1a;
+    border-color: #ffd166;
+    box-shadow: 0 4px 20px rgba(255, 209, 102, 0.6);
+  }
+
+  .class-panel {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 25px;
+    min-height: 280px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .class-panel h4 {
+    font-size: 1.3rem;
+    color: #ff7043;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+  }
+
+  .students {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    list-style: none;
+  }
+
+  .students li {
+    background: #262626;
+    padding: 14px 16px;
+    border-radius: 8px;
+    border-left: 3px solid #ff4500;
+    transition: all 0.2s;
+    font-size: 0.98rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .students li::after {
+    content: "›";
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ff4500;
+    font-size: 1.4rem;
+    opacity: 0.5;
+    transition: all 0.2s;
+  }
+
+  .students li:hover {
+    background: #2f2f2f;
+    transform: translateX(4px);
+    border-left-color: #ffa726;
+    box-shadow: 0 4px 15px rgba(255, 69, 0, 0.25);
+  }
+
+  .students li:hover::after { opacity: 1; right: 10px; }
+
+  /* ===== КАРТОЧКИ РУКОВОДИТЕЛЕЙ ===== */
+  .leaders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .leader-card {
+    background: linear-gradient(160deg, #262626, #1a1a1a);
+    border: 2px solid #b8860b;
+    border-radius: 14px;
+    padding: 22px 20px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .leader-card::before {
+    content: "⭐";
+    position: absolute;
+    font-size: 100px;
+    opacity: 0.05;
+    top: -20px;
+    right: -10px;
+  }
+
+  .leader-card:hover {
+    transform: translateY(-5px);
+    border-color: #ffd166;
+    box-shadow: 0 10px 30px rgba(255, 209, 102, 0.35);
+  }
+
+  .leader-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8b6914, #ffd166);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 14px;
+    border: 3px solid #1a1a1a;
+    box-shadow: 0 0 0 2px #ffd166;
+    position: relative;
+    z-index: 1;
+  }
+
+  .leader-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #ffe9a8;
+    margin-bottom: 4px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .leader-position {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .leader-rank {
+    display: inline-block;
+    background: rgba(255, 209, 102, 0.15);
+    color: #ffd166;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 209, 102, 0.4);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== МОДАЛЬНОЕ ОКНО ===== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(6px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .modal-overlay.active { display: flex; }
+
+  .modal {
+    background: linear-gradient(160deg, #1a1a1a, #111);
+    border: 2px solid #ff4500;
+    border-radius: 16px;
+    max-width: 620px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(255, 69, 0, 0.4), 0 0 0 1px rgba(255,255,255,0.05) inset;
+    position: relative;
+    animation: slideUp 0.35s ease;
+  }
+
+  .modal.leader-modal {
+    border-color: #ffd166;
+    box-shadow: 0 20px 60px rgba(255, 209, 102, 0.4), 0 0 0 1px rgba(255,255,255,0.05) inset;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .modal-header {
+    background: linear-gradient(135deg, #8b0000, #b22222, #ff4500);
+    padding: 25px 30px;
+    border-radius: 14px 14px 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .modal-header.leader-header {
+    background: linear-gradient(135deg, #5c3d00, #8b6914, #d4a017);
+  }
+
+  .modal-header::before {
+    content: "🔥";
+    position: absolute;
+    font-size: 130px;
+    opacity: 0.12;
+    top: -30px;
+    right: -10px;
+  }
+
+  .modal-header.leader-header::before { content: "⭐"; }
+
+  .modal-header h2 {
+    font-size: 1.6rem;
+    color: #fff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+    position: relative;
+    z-index: 1;
+  }
+
+  .modal-header .role {
+    font-size: 1rem;
+    color: #ffe0c0;
+    margin-top: 4px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .modal-header.leader-header .role { color: #fff2b8; }
+
+  .modal-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    background: rgba(0,0,0,0.4);
+    border: none;
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 5;
+    line-height: 1;
+  }
+
+  .modal-close:hover { background: #ff4500; transform: rotate(90deg); }
+  .leader-modal .modal-close:hover { background: #d4a017; }
+
+  .modal-body { padding: 25px 30px 30px; }
+
+  .info-row {
+    display: flex;
+    padding: 12px 0;
+    border-bottom: 1px solid #2a2a2a;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .info-row:last-child { border-bottom: none; }
+
+  .info-label {
+    color: #ff7043;
+    font-weight: 700;
+    min-width: 160px;
+    flex-shrink: 0;
+    font-size: 0.95rem;
+  }
+
+  .leader-modal .info-label { color: #ffd166; }
+
+  .info-value { color: #e0e0e0; flex: 1; font-size: 0.98rem; }
+
+  .badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #b22222, #ff4500);
+    color: #fff;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-right: 6px;
+    margin-bottom: 4px;
+  }
+
+  .leader-modal .badge {
+    background: linear-gradient(135deg, #8b6914, #ffd166);
+    color: #1a1a1a;
+  }
+
+  .medals { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+
+  .call-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #b22222, #ff4500);
+    color: #fff !important;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 700;
+    margin-top: 10px;
+    transition: all 0.2s;
+    box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
+  }
+
+  .call-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 69, 0, 0.6); }
+
+  footer {
+    background: #0a0a0a;
+    padding: 25px 20px;
+    text-align: center;
+    color: #888;
+    border-top: 2px solid #b22222;
+    font-size: 0.9rem;
+  }
+
+  .footer-phone {
+    color: #ff7043;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 8px 0;
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 45px 15px 40px; }
+    header h1 { font-size: 1.4rem; }
+    header h2 { font-size: 0.95rem; }
+    .tab { padding: 10px 18px; font-size: 0.9rem; }
+    .info-row { flex-direction: column; gap: 4px; }
+    .info-label { min-width: auto; }
+    .modal-header h2 { font-size: 1.25rem; }
+    .modal-body { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Корпус пожарных спасателей<br>имени Игоря Люкшина</h1>
+  <h2>Кадетская школа · г. Набережные Челны</h2>
+</header>
+
+<div class="container">
+
+  <div class="info-block">
+    <p><strong>Руководитель корпуса:</strong> старший лейтенант Азат Марсович</p>
+    <p><strong>Телефон для звонков:</strong> <a href="tel:+79393943299">+7 939 394-32-99</a></p>
+    <p><strong>Девиз:</strong> «Спасая других — спасаем себя»</p>
+  </div>
+
+  <h3 class="section-title">Наши классы и руководство</h3>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-class="10к">10 «К»</button>
+    <button class="tab" data-class="9к">9 «К»</button>
+    <button class="tab" data-class="8к">8 «К»</button>
+    <button class="tab" data-class="7к">7 «К»</button>
+    <button class="tab" data-class="7м">7 «М»</button>
+    <button class="tab leaders-tab" data-class="leaders">⭐ Руководители</button>
+  </div>
+
+  <div class="class-panel" id="panel"></div>
+
+</div>
+
+<footer>
+  <p>© 2025 Корпус пожарных спасателей им. Игоря Люкшина</p>
+  <p class="footer-phone">Связь: старший лейтенант Азат Марсович — +7 939 394-32-99</p>
+  <p>г. Набережные Челны · Кадетская школа</p>
+</footer>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal" id="modalBox">
+    <div class="modal-header" id="modalHeader">
+      <button class="modal-close" id="modalClose">×</button>
+      <h2 id="modalName">Имя Фамилия</h2>
+      <div class="role" id="modalRole">Роль</div>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+  // ===== РУКОВОДИТЕЛИ =====
+  const leaders = [
+    {
+      name: "Азат Марсович",
+      position: "Руководитель корпуса пожарных спасателей",
+      rank: "Старший лейтенант",
+      birth: "10.05.1985",
+      phone: "+7 939 394-32-99",
+      education: "Высшее, Академия МЧС России",
+      experience: "15 лет службы в пожарной охране",
+      awards: ["За отвагу на пожаре", "За спасение людей", "Ветеран МЧС", "Отличник службы"],
+      note: "Возглавляет корпус имени Игоря Люкшина. Готовит кадет к службе в МЧС России, проводит регулярные учения и выездные занятия. Пользуется заслуженным авторитетом среди кадет, родителей и коллег.",
+      emoji: "👨‍🚒"
+    },
+    {
+      name: "Игорь Люкшин",
+      position: "Почётный руководитель (имя корпуса)",
+      rank: "Подполковник",
+      birth: "22.08.1975",
+      phone: "—",
+      education: "Высшее пожарно-техническое",
+      experience: "Погиб при исполнении служебного долга",
+      awards: ["Орден Мужества", "Медаль «За отвагу»", "Вечная память"],
+      note: "Имя подполковника Игоря Люкшина носит наш кадетский корпус. Он отдал жизнь, спасая людей на пожаре. Его подвиг — пример мужества, чести и верности профессии для всех кадет. Мы гордимся и помним.",
+      emoji: "🎖️"
+    }
+  ];
+
+  const classesData = {
+    "10к": {
+      title: "10 «К» — выпускной кадетский класс",
+      students: [
+        { name: "Иванов Артём", role: "Командир отделения", rank: "Старший кадет", birth: "12.03.2009", address: "г. Набережные Челны, пр. Мира, 45", phone: "+7 917 123-45-67", hobby: "Пожарно-прикладной спорт, волейбол", awards: ["За отвагу на учениях", "Лучший кадет 2024", "Отличник учёбы"], note: "Капитан школьной команды по ППС. Участник республиканских соревнований." },
+        { name: "Петров Даниил", role: "Заместитель командира", rank: "Вице-сержант", birth: "05.07.2009", address: "г. Набережные Челны, ул. Сююмбике, 12", phone: "+7 917 234-56-78", hobby: "Рукопашный бой, оказание первой помощи", awards: ["За успехи в учёбе", "Активист корпуса"], note: "Инструктор по первой помощи среди младших кадет." },
+        { name: "Смирнов Кирилл", role: "Кадет", rank: "Кадет", birth: "21.11.2009", address: "г. Набережные Челны, ул. Хади Такташа, 88", phone: "+7 917 345-67-89", hobby: "Плавание, строевая подготовка", awards: ["За волю к победе"], note: "Победитель городской спартакиады по плаванию." },
+        { name: "Кузнецов Максим", role: "Связист", rank: "Кадет", birth: "14.02.2009", address: "г. Набережные Челны, б-р Яшьлек, 3", phone: "+7 917 456-78-90", hobby: "Радиосвязь, футбол", awards: ["За дисциплину"], note: "Отвечает за связь в отряде на учениях." },
+        { name: "Соколов Егор", role: "Кадет", rank: "Кадет", birth: "08.09.2009", address: "г. Набережные Челны, ул. Академика Рубаненко, 5", phone: "+7 917 567-89-01", hobby: "Огневая подготовка, шахматы", awards: ["Лучший стрелок класса"], note: "Призёр городских соревнований по стрельбе." },
+        { name: "Попов Никита", role: "Медик отряда", rank: "Младший сержант", birth: "30.04.2009", address: "г. Набережные Челны, ул. Гидростроителей, 21", phone: "+7 917 678-90-12", hobby: "Медицина, биология", awards: ["За спасение на учениях", "Отличник медподготовки"], note: "Прошёл курс юного спасателя МЧС." },
+        { name: "Лебедев Роман", role: "Кадет", rank: "Кадет", birth: "17.06.2009", address: "г. Набережные Челны, ул. Раскольникова, 30", phone: "+7 917 789-01-23", hobby: "Туризм, альпинизм", awards: ["За выносливость"], note: "Участник республиканского слёта кадет." },
+        { name: "Козлов Александр", role: "Кадет", rank: "Кадет", birth: "25.01.2009", address: "г. Набережные Челны, ул. Татарстан, 17", phone: "+7 917 890-12-34", hobby: "Строевая подготовка, музыка", awards: ["За строевую выправку"], note: "Участник парадного расчёта города." },
+        { name: "Новиков Владислав", role: "Кадет", rank: "Кадет", birth: "11.10.2009", address: "г. Набережные Челны, ул. Шамиля Усманова, 8", phone: "+7 917 901-23-45", hobby: "Лёгкая атлетика", awards: ["Отличник физподготовки"], note: "Разрядник по кроссу 1000 м." },
+        { name: "Морозов Илья", role: "Кадет", rank: "Кадет", birth: "02.12.2009", address: "г. Набережные Челны, ул. Московский пр-т, 122", phone: "+7 917 012-34-56", hobby: "Пожарное дело, химия", awards: ["За интерес к профессии"], note: "Мечтает поступить в Академию МЧС." }
+      ]
+    },
+    "9к": {
+      title: "9 «К» — кадетский класс",
+      students: [
+        { name: "Волков Дмитрий", role: "Командир класса", rank: "Старший кадет", birth: "19.05.2010", address: "г. Набережные Челны, ул. Сююмбике, 40", phone: "+7 917 111-22-33", hobby: "ППС, баскетбол", awards: ["Лучший командир", "За отвагу на учениях"], note: "Организатор внутрикорпусных соревнований." },
+        { name: "Зайцев Андрей", role: "Заместитель командира", rank: "Младший сержант", birth: "22.08.2010", address: "г. Набережные Челны, пр. Вахитова, 14", phone: "+7 917 222-33-44", hobby: "Рукопашный бой", awards: ["За волю к победе"], note: "Призёр городского турнира по самбо." },
+        { name: "Соловьёв Матвей", role: "Связист", rank: "Кадет", birth: "03.03.2010", address: "г. Набережные Челны, ул. Мира, 60", phone: "+7 917 333-44-55", hobby: "Техника, радиосвязь", awards: ["За смекалку"], note: "Собрал действующий макет радиостанции." },
+        { name: "Васильев Тимофей", role: "Медик", rank: "Кадет", birth: "14.07.2010", address: "г. Набережные Челны, ул. Ахметшина, 9", phone: "+7 917 444-55-66", hobby: "Медицина, биология", awards: ["Отличник медподготовки"], note: "Победитель школьной олимпиады по ОБЖ." },
+        { name: "Михайлов Арсений", role: "Кадет", rank: "Кадет", birth: "27.11.2010", address: "г. Набережные Челны, ул. Набережная, 33", phone: "+7 917 555-66-77", hobby: "Плавание", awards: ["За упорство"], note: "Второй разряд по плаванию." },
+        { name: "Фёдоров Глеб", role: "Кадет", rank: "Кадет", birth: "09.09.2010", address: "г. Набережные Челны, ул. Гагарина, 25", phone: "+7 917 666-77-88", hobby: "Футбол, строевая", awards: ["Активист"], note: "Участник парада Победы." },
+        { name: "Орлов Степан", role: "Кадет", rank: "Кадет", birth: "16.01.2010", address: "г. Набережные Челны, ул. Титова, 12", phone: "+7 917 777-88-99", hobby: "Огневая подготовка", awards: ["Лучший стрелок"], note: "Победитель городских соревнований по стрельбе." },
+        { name: "Киселёв Лев", role: "Кадет", rank: "Кадет", birth: "04.04.2010", address: "г. Набережные Челны, пр. Сююмбике, 71", phone: "+7 917 888-99-00", hobby: "Шахматы, туризм", awards: ["За интеллект"], note: "Капитан школьной шахматной команды." },
+        { name: "Макаров Марк", role: "Кадет", rank: "Кадет", birth: "23.06.2010", address: "г. Набережные Челны, ул. Дружбы, 15", phone: "+7 917 999-00-11", hobby: "Альпинизм, ППС", awards: ["За выносливость"], note: "Прошёл курс юного туриста-спасателя." },
+        { name: "Никитин Богдан", role: "Кадет", rank: "Кадет", birth: "01.12.2010", address: "г. Набережные Челны, ул. Центральная, 4", phone: "+7 917 100-20-30", hobby: "Музыка, строевая", awards: ["За творчество"], note: "Солист кадетского хора." }
+      ]
+    },
+    "8к": {
+      title: "8 «К» — кадетский класс",
+      students: [
+        { name: "Андреев Иван", role: "Командир класса", rank: "Старший кадет", birth: "15.03.2011", address: "г. Набережные Челны, пр. Мира, 88", phone: "+7 917 200-30-40", hobby: "ППС, футбол", awards: ["Лучший командир", "Активист"], note: "Капитан школьной футбольной команды." },
+        { name: "Алексеев Егор", role: "Заместитель", rank: "Младший сержант", birth: "27.06.2011", address: "г. Набережные Челны, ул. Сююмбике, 55", phone: "+7 917 300-40-50", hobby: "Рукопашный бой", awards: ["За дисциплину"], note: "Победитель школьного турнира по самбо." },
+        { name: "Степанов Пётр", role: "Кадет", rank: "Кадет", birth: "10.09.2011", address: "г. Набережные Челны, ул. Хади Такташа, 71", phone: "+7 917 400-50-60", hobby: "Плавание", awards: ["За упорство"], note: "Третий разряд по плаванию." },
+        { name: "Яковлев Савелий", role: "Связист", rank: "Кадет", birth: "21.11.2011", address: "г. Набережные Челны, б-р Яшьлек, 20", phone: "+7 917 500-60-70", hobby: "Радиосвязь, техника", awards: ["За смекалку"], note: "Помощник инструктора по связи." },
+        { name: "Григорьев Тимур", role: "Кадет", rank: "Кадет", birth: "05.01.2011", address: "г. Набережные Челны, ул. Академика Рубаненко, 17", phone: "+7 917 600-70-80", hobby: "Огневая подготовка", awards: ["Лучший стрелок класса"], note: "Призёр городских соревнований." },
+        { name: "Романов Демид", role: "Медик", rank: "Кадет", birth: "18.05.2011", address: "г. Набережные Челны, ул. Гидростроителей, 44", phone: "+7 917 700-80-90", hobby: "Медицина", awards: ["За заботу о товарищах"], note: "Помощник медсестры на сборах." },
+        { name: "Воробьёв Руслан", role: "Кадет", rank: "Кадет", birth: "29.07.2011", address: "г. Набережные Челны, ул. Раскольникова, 11", phone: "+7 917 800-90-00", hobby: "Туризм, альпинизм", awards: ["За выносливость"], note: "Участник похода 1-й категории." },
+        { name: "Сергеев Константин", role: "Кадет", rank: "Кадет", birth: "13.10.2011", address: "г. Набережные Челны, ул. Татарстан, 33", phone: "+7 917 900-00-11", hobby: "Строевая, музыка", awards: ["За творчество"], note: "Участник кадетского хора." },
+        { name: "Кузьмин Ярослав", role: "Кадет", rank: "Кадет", birth: "02.12.2011", address: "г. Набережные Челны, ул. Шамиля Усманова, 21", phone: "+7 917 011-22-33", hobby: "Лёгкая атлетика", awards: ["Отличник физподготовки"], note: "Разрядник по бегу на 100 м." },
+        { name: "Фролов Давид", role: "Кадет", rank: "Кадет", birth: "25.02.2011", address: "г. Набережные Челны, Московский пр-т, 140", phone: "+7 917 122-33-44", hobby: "Пожарное дело, химия", awards: ["За тягу к знаниям"], note: "Мечтает стать пожарным." }
+      ]
+    },
+    "7к": {
+      title: "7 «К» — кадетский класс",
+      students: [
+        { name: "Александров Мирон", role: "Командир класса", rank: "Кадет", birth: "12.04.2012", address: "г. Набережные Челны, пр. Мира, 20", phone: "+7 917 233-44-55", hobby: "ППС, баскетбол", awards: ["За инициативу"], note: "Активный участник корпусных мероприятий." },
+        { name: "Дмитриев Захар", role: "Заместитель", rank: "Кадет", birth: "23.06.2012", address: "г. Набережные Челны, ул. Сююмбике, 8", phone: "+7 917 344-55-66", hobby: "Футбол", awards: ["За командный дух"], note: "Нападающий школьной команды." },
+        { name: "Королёв Егор", role: "Связист", rank: "Кадет", birth: "07.09.2012", address: "г. Набережные Челны, ул. Хади Такташа, 12", phone: "+7 917 455-66-77", hobby: "Техника, радиосвязь", awards: ["За смекалку"], note: "Интересуется радиоделом." },
+        { name: "Гусев Артур", role: "Кадет", rank: "Кадет", birth: "18.11.2012", address: "г. Набережные Челны, б-р Яшьлек, 40", phone: "+7 917 566-77-88", hobby: "Рукопашный бой", awards: ["За упорство"], note: "Занимается самбо второй год." },
+        { name: "Беляев Илья", role: "Медик", rank: "Кадет", birth: "30.01.2012", address: "г. Набережные Челны, ул. Академика Рубаненко, 8", phone: "+7 917 677-88-99", hobby: "Биология, медицина", awards: ["За отзывчивость"], note: "Помогает на занятиях по первой помощи." },
+        { name: "Тарасов Матвей", role: "Кадет", rank: "Кадет", birth: "14.03.2012", address: "г. Набережные Челны, ул. Гидростроителей, 7", phone: "+7 917 788-99-00", hobby: "Плавание", awards: ["За волю к победе"], note: "Участник городских соревнований." },
+        { name: "Белов Роман", role: "Кадет", rank: "Кадет", birth: "25.05.2012", address: "г. Набережные Челны, ул. Раскольникова, 55", phone: "+7 917 899-00-11", hobby: "Строевая подготовка", awards: ["За выправку"], note: "В составе парадного расчёта." },
+        { name: "Комаров Никита", role: "Кадет", rank: "Кадет", birth: "08.08.2012", address: "г. Набережные Челны, ул. Татарстан, 9", phone: "+7 917 900-11-22", hobby: "Огневая подготовка", awards: ["За точность"], note: "Лучший результат по стрельбе в классе." },
+        { name: "Щербаков Лев", role: "Кадет", rank: "Кадет", birth: "21.10.2012", address: "г. Набережные Челны, ул. Шамиля Усманова, 33", phone: "+7 917 012-34-56", hobby: "Шахматы", awards: ["За интеллект"], note: "Участник городского шахматного турнира." },
+        { name: "Баранов Кирилл", role: "Кадет", rank: "Кадет", birth: "03.12.2012", address: "г. Набережные Челны, Московский пр-т, 160", phone: "+7 917 123-45-67", hobby: "Музыка, туризм", awards: ["За творчество"], note: "Играет на гитаре в кадетском ансамбле." }
+      ]
+    },
+    "7м": {
+      title: "7 «М» — кадетский класс",
+      students: [
+        { name: "Пономарёв Даниил", role: "Командир класса", rank: "Кадет", birth: "05.02.2012", address: "г. Набережные Челны, пр. Мира, 5", phone: "+7 917 234-56-78", hobby: "ППС, футбол", awards: ["За лидерство"], note: "Организатор классных мероприятий." },
+        { name: "Крылов Вячеслав", role: "Заместитель", rank: "Кадет", birth: "17.04.2012", address: "г. Набережные Челны, ул. Сююмбике, 21", phone: "+7 917 345-67-89", hobby: "Рукопашный бой", awards: ["За дисциплину"], note: "Помощник тренера младших групп." },
+        { name: "Ефимов Артём", role: "Связист", rank: "Кадет", birth: "29.06.2012", address: "г. Набережные Челны, ул. Хади Такташа, 44", phone: "+7 917 456-78-90", hobby: "Техника", awards: ["За смекалку"], note: "Разбирается в электронике." },
+        { name: "Герасимов Иван", role: "Медик", rank: "Кадет", birth: "11.09.2012", address: "г. Набережные Челны, б-р Яшьлек, 12", phone: "+7 917 567-89-01", hobby: "Медицина, биология", awards: ["За заботу"], note: "Помощник на медпункте сборов." },
+        { name: "Данилов Пётр", role: "Кадет", rank: "Кадет", birth: "23.11.2012", address: "г. Набережные Челны, ул. Академика Рубаненко, 22", phone: "+7 917 678-90-12", hobby: "Плавание", awards: ["За упорство"], note: "Третий разряд по плаванию." },
+        { name: "Жуков Семён", role: "Кадет", rank: "Кадет", birth: "04.01.2012", address: "г. Набережные Челны, ул. Гидростроителей, 19", phone: "+7 917 789-01-23", hobby: "Огневая подготовка", awards: ["За меткость"], note: "Участник соревнований по стрельбе." },
+        { name: "Зимин Егор", role: "Кадет", rank: "Кадет", birth: "16.03.2012", address: "г. Набережные Челны, ул. Раскольникова, 4", phone: "+7 917 890-12-34", hobby: "Строевая, музыка", awards: ["За выправку"], note: "В парадном расчёте школы." },
+        { name: "Игнатов Марк", role: "Кадет", rank: "Кадет", birth: "28.05.2012", address: "г. Набережные Челны, ул. Татарстан, 50", phone: "+7 917 901-23-45", hobby: "Туризм, альпинизм", awards: ["За выносливость"], note: "Участник осеннего похода." },
+        { name: "Костин Алексей", role: "Кадет", rank: "Кадет", birth: "09.08.2012", address: "г. Набережные Челны, ул. Шамиля Усманова, 14", phone: "+7 917 012-34-56", hobby: "Шахматы, лёгкая атлетика", awards: ["За разносторонность"], note: "Активист спортивного клуба." },
+        { name: "Лаптев Дмитрий", role: "Кадет", rank: "Кадет", birth: "21.10.2012", address: "г. Набережные Челны, Московский пр-т, 88", phone: "+7 917 123-45-67", hobby: "Пожарное дело", awards: ["За интерес к профессии"], note: "Готовится поступать в профильный класс." }
+      ]
+    }
+  };
+
+  const tabs = document.querySelectorAll('.tab');
+  const panel = document.getElementById('panel');
+  const modal = document.getElementById('modal');
+  const modalBox = document.getElementById('modalBox');
+  const modalHeader = document.getElementById('modalHeader');
+  const modalName = document.getElementById('modalName');
+  const modalRole = document.getElementById('modalRole');
+  const modalBody = document.getElementById('modalBody');
+  const modalClose = document.getElementById('modalClose');
+
+  function renderClass(key) {
+    if (key === 'leaders') { renderLeaders(); return; }
+    const data = classesData[key];
+    let html = `<h4>${data.title}</h4><ul class="students">`;
+    data.students.forEach((student, i) => {
+      html += `<li data-class="${key}" data-index="${i}">${student.name}</li>`;
+    });
+    html += `</ul>`;
+    panel.innerHTML = html;
+    panel.style.animation = 'none';
+    panel.offsetHeight;
+    panel.style.animation = 'fadeIn 0.4s ease';
+  }
+
+  function renderLeaders() {
+    let html = `<h4>⭐ Руководство корпуса</h4><div class="leaders-grid">`;
+    leaders.forEach((l, i) => {
+      html += `
+        <div class="leader-card" data-leader="${i}">
+          <div class="leader-avatar">${l.emoji}</div>
+          <div class="leader-name">${l.name}</div>
+          <div class="leader-position">${l.position}</div>
+          <span class="leader-rank">${l.rank}</span>
+        </div>`;
+    });
+    html += `</div>`;
+    panel.innerHTML = html;
+    panel.style.animation = 'none';
+    panel.offsetHeight;
+    panel.style.animation = 'fadeIn 0.4s ease';
+  }
+
+  function infoRow(label, value) {
+    return `<div class="info-row"><div class="info-label">${label}</div><div class="info-value">${value}</div></div>`;
+  }
+
+  panel.addEventListener('click', (e) => {
+    const li = e.target.closest('li[data-index]');
+    if (li) {
+      const cls = li.dataset.class;
+      const idx = li.dataset.index;
+      openStudentModal(classesData[cls].students[idx]);
+      return;
+    }
+    const card = e.target.closest('.leader-card');
+    if (card) openLeaderModal(leaders[card.dataset.leader]);
+  });
+
+  function openStudentModal(s) {
+    modalBox.classList.remove('leader-modal');
+    modalHeader.classList.remove('leader-header');
+    modalName.textContent = s.name;
+    modalRole.textContent = `${s.role} · ${s.rank}`;
+    let html = '';
+    html += infoRow('Дата рождения', s.birth);
+    html += infoRow('Адрес', s.address);
+    html += infoRow('Телефон', `<a href="tel:${s.phone.replace(/\D/g,'')}" style="color:#ff7043;text-decoration:none;font-weight:600;">${s.phone}</a>`);
+    html += infoRow('Увлечения', s.hobby);
+    html += infoRow('Достижения', `<div class="medals">${s.awards.map(a => `<span class="badge">🏅 ${a}</span>`).join('')}</div>`);
+    html += infoRow('О кадете', s.note);
+    modalBody.innerHTML = html;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function openLeaderModal(l) {
+    modalBox.classList.add('leader-modal');
+    modalHeader.classList.add('leader-header');
+    modalName.textContent = l.name;
+    modalRole.textContent = `${l.position} · ${l.rank}`;
+    let html = '';
+    html += infoRow('Должность', l.position);
+    html += infoRow('Звание', l.rank);
+    if (l.birth && l.birth !== '—') html += infoRow('Дата рождения', l.birth);
+    if (l.education) html += infoRow('Образование', l.education);
+    if (l.experience) html += infoRow('Опыт', l.experience);
+    if (l.phone && l.phone !== '—') {
+      html += infoRow('Телефон', `
+        <a href="tel:${l.phone.replace(/\D/g,'')}" style="color:#ffd166;text-decoration:none;font-weight:700;">${l.phone}</a>
+        <br><a class="call-btn" href="tel:${l.phone.replace(/\D/g,'')}">📞 Позвонить</a>
+      `);
+    }
+    if (l.awards && l.awards.length) {
+      html += infoRow('Награды', `<div class="medals">${l.awards.map(a => `<span class="badge">🏅 ${a}</span>`).join('')}</div>`);
+    }
+    html += infoRow('О руководителе', l.note);
+    modalBody.innerHTML = html;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      renderClass(tab.dataset.class);
+    });
+  });
+
+  renderClass('10к');
+</script>
+
+</body>
+</html>
